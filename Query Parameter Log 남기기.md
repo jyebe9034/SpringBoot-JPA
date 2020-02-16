@@ -9,3 +9,16 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.type: trace // 이 부분 추가
 ```
+
+로그 결과
+```
+2020-02-16 11:25:49.928 DEBUG 1491 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        member
+        (username, id) 
+    values
+        (?, ?)
+2020-02-16 11:25:49.931 TRACE 1491 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [memberA]
+2020-02-16 11:25:49.931 TRACE 1491 --- [    Test worker] o.h.type.descriptor.sql.BasicBinder      : binding parameter [2] as [BIGINT] - [1]
+```
