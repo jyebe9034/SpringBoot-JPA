@@ -42,5 +42,7 @@ implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.1'
 insert into member (username, id) values (?, ?)
 insert into member (username, id) values ('memberA', 1);
 ```
+P6Spy를 사용하면 접속 정보까지 자세하게 나온다는 장점이 있음.
+그러나 서드파티 라이브러리의 경우 개발단계에서는 사용해도 괜찮지만 운영단계에서는 성능테스트를 해보고 남겨둘지 지울지 결정해야 함. 라이브러리가 성능에 영향을 준다고 함.
 
 참고 : https://github.com/gavlyukovskiy/spring-boot-data-source-decorator
