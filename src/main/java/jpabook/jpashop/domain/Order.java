@@ -24,10 +24,13 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItmes = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "delivery_id") // 1 : 1 관계에서 한쪽을 주인으로 잡아줌.
     private Delivery delivery;
 
     private LocalDateTime orderDate; // hibernate가 자동으로 현재시간을 지원해 줌.
 
+    @Enumerated(EnumType.STRING)
     private OrderStatus status; // 주문 상태[ORDER, CANCEL]
 
 }
