@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Getter @Setter
 public class Category {
@@ -27,10 +29,16 @@ public class Category {
     // 실무에서는 이렇게 사용하지 않음. 왜냐면 매핑테이블에 어떤 다른 컬럼을 추가할 수 없기 때문.
     private List<Item> items = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
     private List<Category> child = new ArrayList<>();
+
+    // == 연관관계 편의 메서드 ==
+    public void addChildCategory(Category child) {
+        this.child.add(child);
+        child.setParent(this );
+    }
 }
