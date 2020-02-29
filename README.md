@@ -8,13 +8,36 @@
 7. 웹 계층 개발
 
 ### 프로젝트 환경 설정
+* Dependancies 추가 및 H2 DB연결
+* Test코드로 접속 상태 확인
+* 필요한 엔티티 생성 및 설정 추가
 
 ### 요구사항 분석
+* 회원 기능
+  - 회원 등록
+  - 회원 조회
+* 상품 기능
+  - 상품 득록
+  - 상품 목록
+* 주무 기능
+  - 상품 주문
+  - 주문 내역
 
 ### 아키텍처 구성
 * 계층형 구조 사용
   - controller, web : 웹계층
   - service : 비지니스 로직, 트랜잭션 처리
   - repository : JPA를 직접 사용하는 계층, 엔티티 매니저 사용
-  - domain : 엔티티가 모여있는 계층, 모든 계층에 사용
+  - domain : 엔티티가 모여있는 계층, 모든 계층에서 사용
+  
+* 패키지 구조
+  - jpabook.jpashop
+    + domain
+    + exception
+    + repository
+    + service
+    + web
+    
+
+    
   
