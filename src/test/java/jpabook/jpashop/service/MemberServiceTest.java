@@ -6,7 +6,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
- import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ public class MemberServiceTest {
     @Autowired EntityManager em;
 
     @Test
-//    @Rollback(false) 데이터에 값이 잘 들어간 걸 확인할 수 있음
+    @Rollback(false) // 데이터에 값이 잘 들어간 걸 확인할 수 있음
     public void 회원가입() throws Exception {
         // given
         Member member = new Member();

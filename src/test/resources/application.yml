@@ -12,6 +12,7 @@ spring:
 #      hibernate:
 #        show_sql: true
 #        format_sql: true
+
 # 스프링 부트에서는 이 설정들이 다 없어서 자동으로 메모리 모드로 동작함.
 
 logging:
