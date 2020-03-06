@@ -64,5 +64,3 @@
     + cascade를 사용하는 범위는 Order가 Delivery를 관리하고 OrderItem을 관리하는 관계 정도에서만 사용하는 것이 좋다. private honor이 경우에 사용하는 것이 좋다.
   - 주문 내역 조회
   - 주문 취소
-
-* 
