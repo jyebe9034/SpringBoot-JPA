@@ -33,6 +33,7 @@ public class OrderService {
         // 배송정보 생성
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
+        delivery.setStatus(DeliveryStatus.READY);
 
         // 주문상품 생성
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
@@ -51,7 +52,7 @@ public class OrderService {
      * 주문 취소
      */
     public void cancelOrder(Long orderId) {
-        // 주문 엔티티 조
+        // 주문 엔티티 조회
         Order order = orderRepository.findOne(orderId);
 
         // 주문 취소
@@ -59,7 +60,6 @@ public class OrderService {
     }
 
     // 검색
-
     public List<Order> findOrders(OrderSearch orderSearch) {
         return orderRepository.findAll(orderSearch);
     }

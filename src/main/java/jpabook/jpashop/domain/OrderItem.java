@@ -11,6 +11,7 @@ import javax.persistence.*;
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
+@Table(name = "order_item")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // protected OrderItem() {} 생성자와 같은 것!
 public class OrderItem {
