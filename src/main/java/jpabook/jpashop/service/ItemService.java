@@ -14,8 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemService {
 
-    @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
 
     @Transactional
     public void saveItem(Item item) {
