@@ -36,6 +36,7 @@ public class InitDb {
     static class InitService {
 
         private final EntityManager em;
+
         public void dbInit1() {
             Member member = createMember("userA", "seoul", "songpa", "1111");
             em.persist(member);
@@ -83,7 +84,7 @@ public class InitDb {
         Book book1 = new Book();
         book1.setName(name);
         book1.setPrice(price);
-        book1.setStockQuantity( stockQuantity);
+        book1.setStockQuantity(stockQuantity);
         return book1;
     }
 
