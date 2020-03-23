@@ -111,6 +111,8 @@
         + 간단한 어플리케이션이 아닌 경우 엔티티를 그대로 외부에 노출하면 안됨. Hibernate5Module을 사용하는 것 보다는 DTO를 만들어 사용하는게 좋음. 
         + 지연로딩(LAZY)을 피하기 위해 즉시로딩(EAGER)을 하면 안됨. 즉시로딩으로 설정하 성능 튜닝이 매우 어려워 짐.
     - 컬렉션 조회 최적화
+        + 페치조인(fetch join) : inner join으로 변형되어 쿼리를 1번만 조회함
+        + 페치조인으로 order -> member, order -> delivery는 이미 조회된 상태이므로 지연로딩은 발생하지 않음.
     - 페이징과 한계 돌파
     - OSIV(Opne Session In View)와 성능 최적화 
     
