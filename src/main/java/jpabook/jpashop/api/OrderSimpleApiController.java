@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderSimpleApiController {
 
-    private final OrderService orderService;
+    private final OrderRepository orderRepository;
 
     @GetMapping("/api/v1/simple-orders")
     public List<Order> ordersV1() {
-        List<Order> all = orderService.findOrders(new OrderSearch());
+        List<Order> all = orderRepository.findAllByString(new OrderSearch());
         for (Order order : all) {
             order.getMember().getName(); // LAZY 강제 초기화
             order.getDelivery().getAddress(); // LAZY 강제 초기화
@@ -36,10 +36,21 @@ public class OrderSimpleApiController {
 
     @GetMapping("/api/v2/simple-orders")
     public List<SimpleOrderDto> orderV2() {
-        List<Order> orders = orderService.findOrders(new OrderSearch());
-        List<SimpleOrderDto> result = orders.stream().map(o -> new SimpleOrderDto(o))
+        // ORDER 2개
+        // N + 1, 1 + 회원 N + 배송 N
+        List<Order> orders = orderRepository.findAllByString(new OrderSearch());
+        List<SimpleOrderDto> result = orders.stream()
+                .map(o -> new SimpleOrderDto(o))
                 .collect(Collectors.toList());
         return result;
+    }
+
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> orderV3() {
+        List<Order> orders = orderRepository.findAllWithMemberDelivery();
+        return orders.stream()
+                .map(o -> new SimpleOrderDto(o))
+                .collect(Collectors.toList());
     }
 
     @Data
