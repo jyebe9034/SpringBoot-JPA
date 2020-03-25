@@ -3,6 +3,7 @@ package jpabook.jpashop.repository;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderSearch;
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +43,8 @@ public class OrderRepository {
     }
 
     public List<Order> findAllByString(OrderSearch orderSearch) { //language=JPAQL
-        String jpql = "select o From Order o join o.member m"; boolean isFirstCondition = true;
+        String jpql = "select o From Order o join o.member m";
+        boolean isFirstCondition = true;
 
         //주문 상태 검색
         if (orderSearch.getOrderStatus() != null) {
@@ -52,7 +54,8 @@ public class OrderRepository {
             } else {
                 jpql += " and";
             }
-            jpql += " o.status = :status"; }
+            jpql += " o.status = :status";
+        }
 
         //회원 이름 검색
         if (StringUtils.hasText(orderSearch.getMemberName())) {
@@ -62,14 +65,16 @@ public class OrderRepository {
             } else {
                 jpql += " and";
             }
-            jpql += " m.name like :name"; }
+            jpql += " m.name like :name";
+        }
 
-        TypedQuery<Order> query = em.createQuery(jpql, Order.class) .setMaxResults(1000); //최대 1000건
+        TypedQuery<Order> query = em.createQuery(jpql, Order.class).setMaxResults(1000); //최대 1000건
         if (orderSearch.getOrderStatus() != null) {
             query = query.setParameter("status", orderSearch.getOrderStatus());
         }
         if (StringUtils.hasText(orderSearch.getMemberName())) {
-            query = query.setParameter("name", orderSearch.getMemberName()); }
+            query = query.setParameter("name", orderSearch.getMemberName());
+        }
         return query.getResultList();
     }
 
@@ -83,18 +88,21 @@ public class OrderRepository {
         //주문 상태 검색
         if (orderSearch.getOrderStatus() != null) {
             Predicate status = cb.equal(o.get("status"), orderSearch.getOrderStatus());
-            criteria.add(status); }
+            criteria.add(status);
+        }
 
         //회원 이름 검색
         if (StringUtils.hasText(orderSearch.getMemberName())) {
             Predicate name = cb.like(m.<String>get("name"), "%" +
-                    orderSearch.getMemberName() + "%"); criteria.add(name);
+                    orderSearch.getMemberName() + "%");
+            criteria.add(name);
 
         }
 
         cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
-        return query.getResultList(); }
+        return query.getResultList();
+    }
 
     public List<Order> findAllWithMemberDelivery() {
         return em.createQuery(
@@ -104,4 +112,5 @@ public class OrderRepository {
         ).getResultList();
 
     }
+
 }
