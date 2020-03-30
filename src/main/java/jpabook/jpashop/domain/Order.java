@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    // @BatchSize(size = 1000) // application.yml에서 default_batch_fetch_size를 설정해 주는 것과 같은 역할, but .yml파일에 설정하면 global로 적용됨.
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // Order가 persist될 때, CascadeType.All이 걸려있는 필드들도 같이 persist된다.
     private List<OrderItem> orderItems = new ArrayList<>();
 
