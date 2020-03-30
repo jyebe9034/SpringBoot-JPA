@@ -130,3 +130,15 @@
 ##### distinct 키워드의 2가지 기능
 1. DB에 distinct 키워드를 날려줌. (원래 sql의 distinct는 모든 컬럼의 값이 동일해야 중복으로 인식함.)
 2. 루트 엔티티가 중복인 경우에 중복을 제거해서 컬렉션에 담아 줌.
+
+##### select query 조회 시 주의할 점
+1. ToOne(ManayToOne, OneToOne)관계는 모두 fetch join함.(왜냐면 데이터가 뻥튀기 되지 않으니까)
+2. 컬렉션은 지연로딩으로 조회함.
+3. 지연 로딩 성능 최적화를 위해서 hibernate.default_batch_fetch_size나 @BatchSize를 적용함.
+    => 이 옵션들을 사용하면 컬렉션이나 프록시 객체를 설정한 size만큼 한번에 IN query로 조회함.
+    -  hibernate.default_batch_fetch_size는 글로벌 설정
+    - @BatchSize는 클래스나 메서드에 붙여주는 개별 최적화
+        + 장점
+        + 쿼리 호출 수가 1 + N 에서 1 + 1로 최적화 됨.
+        + 조인보다 DB데이터 전송량이 최적화 됨.
+        + v3방법은 페이징이 불가능하지만 v3.1방법은 페이징이 가능함.
