@@ -149,3 +149,6 @@
         + v3방법은 페이징이 불가능하지만 v3.1방법은 페이징이 가능함.
         
 ### JPA의 EntityManager가 Hibernate에선 Session임.
+
+
+* Querydsl
