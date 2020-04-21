@@ -35,7 +35,7 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    public List<Order> findAll(OrderSearch orderSearch) {
+    public List<Order> findAll(OrderSearch orderSearch) { // querydsl을 이용해서 다시 짠 코드임.
         return query
                 .select(order)
                 .from(order)
